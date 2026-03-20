@@ -3,4 +3,3 @@ __pycache__/
 .env
 *.py[cod]
 *.csv
-*.csv
