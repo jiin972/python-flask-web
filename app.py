@@ -33,14 +33,14 @@ def search():
 @app.route("/export")
 def export():
     keyword = request.args.get("keyword") #request.args의 data에서 필요한 부분은 .get()함수로 추출
-    #키워드 없을 때, 방어코드 작성
+    #키워드 없이 url접근  방어코드 
     if keyword == None:
         return redirect("/")
-    #db에 없는 키워드 접근, 방어코드 작성
-    if keyword is not db:
+    #db에 없는 키워드 접근 시 방어코드
+    if keyword not in db:
         return redirect(f"/search?keyword={keyword}") #키워드가 없을 경우, 검색페이지 강제 이동
     #파일저장로직
-    save_to_file(keyword, db[keyword])
+    save_to_file(keyword,db[keyword])
     return send_file(f"{keyword}.csv", as_attachment=True)
 
 
